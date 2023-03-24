@@ -16,6 +16,7 @@ struct Snake {
     food: (u32, u32),
     direction: Direction,
     previous_direction: Direction,
+    wait_time: u64,
 }
 
 impl Snake {
@@ -26,6 +27,7 @@ impl Snake {
             food: (Snake::gen_pos()),
             direction: Direction::Up,
             previous_direction: Direction::Down,
+            wait_time: TIME.0 as u64,
         }
     }
     fn gen_pos() -> (u32, u32) {
@@ -43,6 +45,10 @@ impl Snake {
             }
         }
         self.food = food;
+    }
+    fn update_time(&mut self) {
+        let time  = ((TIME.1 - TIME.0) * self.body.len() as i32 / (SIZE.0 * SIZE.1) as i32) + TIME.0;
+        self.wait_time = time as u64;
     }
 }
 
@@ -156,7 +162,8 @@ fn main() {
 
         if game.head == game.food {
             game.body.push(game.head);
-            game.spawn_food()
+            game.update_time();
+            game.spawn_food();
         }
 
         canvas.set_draw_color(Color::GRAY);
@@ -174,8 +181,7 @@ fn main() {
         }
 
         canvas.present();
-        let time = ((TIME.1 - TIME.0) * game.body.len() as i32 / (SIZE.0 * SIZE.1) as i32) + TIME.0 ;
-        std::thread::sleep(Duration::from_millis(time as u64));
+        std::thread::sleep(Duration::from_millis(game.wait_time));
     }
 }
 
