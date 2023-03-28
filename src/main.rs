@@ -170,13 +170,12 @@ fn main() {
         canvas.set_draw_color(Color::GREEN);
         canvas.fill_rect(rect_from_pos(game.head)).unwrap();
 
-        canvas.set_draw_color(Color::RED);
-        canvas.fill_rect(rect_from_pos(game.food)).unwrap();
-
         for x in &game.body {
-            canvas.set_draw_color(Color::GREEN);
             canvas.fill_rect(rect_from_pos(*x)).unwrap();
         }
+
+        canvas.set_draw_color(Color::RED);
+        canvas.fill_rect(rect_from_pos(game.food)).unwrap();
 
         canvas.present();
         std::thread::sleep(Duration::from_millis(game.wait_time));
