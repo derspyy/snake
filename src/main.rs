@@ -15,7 +15,6 @@ struct Snake {
     body: Vec<(u32, u32)>,
     food: (u32, u32),
     direction: Direction,
-    previous_direction: Direction,
     wait_time: u64,
 }
 
@@ -26,7 +25,6 @@ impl Snake {
             body: Vec::new(),
             food: (Snake::gen_pos()),
             direction: Direction::Up,
-            previous_direction: Direction::Down,
             wait_time: TIME.0 as u64,
         }
     }
@@ -83,7 +81,7 @@ fn main() {
                     keycode: Some(Keycode::Up),
                     ..
                 } => {
-                    if game.previous_direction != Direction::Down {
+                    if game.direction != Direction::Down {
                         game.direction = Direction::Up;
                     }
                 }
@@ -91,7 +89,7 @@ fn main() {
                     keycode: Some(Keycode::Down),
                     ..
                 } => {
-                    if game.previous_direction != Direction::Up {
+                    if game.direction != Direction::Up {
                         game.direction = Direction::Down;
                     }
                 }
@@ -99,7 +97,7 @@ fn main() {
                     keycode: Some(Keycode::Left),
                     ..
                 } => {
-                    if game.previous_direction != Direction::Right {
+                    if game.direction != Direction::Right {
                         game.direction = Direction::Left;
                     }
                 }
@@ -107,7 +105,7 @@ fn main() {
                     keycode: Some(Keycode::Right),
                     ..
                 } => {
-                    if game.previous_direction != Direction::Left {
+                    if game.direction != Direction::Left {
                         game.direction = Direction::Right;
                     }
                 }
@@ -115,8 +113,6 @@ fn main() {
                 _ => {}
             }
         }
-
-        game.previous_direction = game.direction;
 
         if game.body.last().is_some() {
             game.body.pop();
