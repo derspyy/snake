@@ -40,7 +40,7 @@ impl Snake {
         let mut food;
         loop {
             food = Snake::gen_pos();
-            if !self.body.contains(&food) && &food != &self.head {
+            if !self.body.contains(&food) && food != self.head {
                 break
             }
         }
@@ -154,10 +154,8 @@ fn main() {
             }
         }
 
-        for x in &game.body {
-            if x == &game.head {
-                return;
-            }
+        if game.body.contains(&game.head) {
+            return
         }
 
         if game.head == game.food {
