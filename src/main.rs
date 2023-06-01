@@ -5,7 +5,7 @@ use sdl2::keyboard::Keycode;
 use sdl2::pixels::Color;
 use sdl2::rect::Rect;
 
-use rand::prelude::{thread_rng, Rng};
+use nanorand::{Rng, WyRand};
 
 const SIZE: (u32, u32) = (40, 30);
 const TIME: (i32, i32) = (500, 200);
@@ -29,9 +29,9 @@ impl Snake {
         }
     }
     fn gen_pos() -> (u32, u32) {
-        let mut rng = thread_rng();
-        let x = rng.gen_range(0..SIZE.0 - 1);
-        let y = rng.gen_range(0..SIZE.1 - 1);
+        let mut rng = WyRand::new();
+        let x = rng.generate_range(0..SIZE.0 - 1);
+        let y = rng.generate_range(0..SIZE.1 - 1);
         (x, y)
     }
     fn spawn_food(&mut self) {
