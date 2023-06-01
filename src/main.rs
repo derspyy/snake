@@ -10,6 +10,14 @@ use nanorand::{Rng, WyRand};
 const SIZE: (u32, u32) = (40, 30);
 const TIME: (i32, i32) = (500, 200);
 
+#[derive(PartialEq, Clone, Copy)]
+enum Direction {
+    Up,
+    Down,
+    Left,
+    Right,
+}
+
 struct Snake {
     head: (u32, u32),
     body: Vec<(u32, u32)>,
@@ -48,14 +56,6 @@ impl Snake {
         let time  = ((TIME.1 - TIME.0) * self.body.len() as i32 / (SIZE.0 * SIZE.1) as i32) + TIME.0;
         self.wait_time = time as u64;
     }
-}
-
-#[derive(PartialEq, Clone, Copy)]
-enum Direction {
-    Up,
-    Down,
-    Left,
-    Right,
 }
 
 fn main() {
