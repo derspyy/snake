@@ -30,8 +30,8 @@ impl Snake {
     }
     fn gen_pos() -> (u32, u32) {
         let mut rng = WyRand::new();
-        let x = rng.generate_range(0..SIZE.0 - 1);
-        let y = rng.generate_range(0..SIZE.1 - 1);
+        let x = rng.generate_range(0..SIZE.0);
+        let y = rng.generate_range(0..SIZE.1);
         (x, y)
     }
     fn spawn_food(&mut self) {
