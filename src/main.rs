@@ -75,6 +75,7 @@ fn main() {
     let mut game = Snake::new();
 
     loop {
+        let mut direction = None;
         for event in event_pump.poll_iter() {
             match event {
                 Event::KeyDown {
@@ -82,7 +83,7 @@ fn main() {
                     ..
                 } => {
                     if game.direction != Direction::Down {
-                        game.direction = Direction::Up;
+                        direction = Some(Direction::Up);
                     }
                 }
                 Event::KeyDown {
@@ -90,7 +91,7 @@ fn main() {
                     ..
                 } => {
                     if game.direction != Direction::Up {
-                        game.direction = Direction::Down;
+                        direction = Some(Direction::Down);
                     }
                 }
                 Event::KeyDown {
@@ -98,7 +99,7 @@ fn main() {
                     ..
                 } => {
                     if game.direction != Direction::Right {
-                        game.direction = Direction::Left;
+                        direction = Some(Direction::Left);
                     }
                 }
                 Event::KeyDown {
@@ -106,14 +107,18 @@ fn main() {
                     ..
                 } => {
                     if game.direction != Direction::Left {
-                        game.direction = Direction::Right;
+                        direction = Some(Direction::Right);
                     }
                 }
                 Event::Quit { .. } => return,
                 _ => {}
             }
         }
-
+        
+        if let Some(value) = direction {
+            game.direction = value;
+        }
+        
         if game.body.last().is_some() {
             game.body.pop();
             game.body.insert(0, game.head)
