@@ -1,4 +1,6 @@
-# usage guide :snake:
+# usage guide :snake: :crab:
+
+> [derspyy/nimhoca](https://github.com/derspyy/nimhoca) :crown:
 
 you need [sdl2](https://wiki.libsdl.org/SDL2/Installation) both for hackin' and playing.
 
