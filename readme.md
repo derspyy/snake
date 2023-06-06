@@ -4,4 +4,4 @@ you need [sdl2](https://wiki.libsdl.org/SDL2/Installation) both for hackin' and 
 
 guide for [rust-sdl2](https://github.com/Rust-SDL2/rust-sdl2) here.
 
-> :brazil: https://piuvas.net/proj2/
+> https://piuvas.net/proj2/ :brazil:
