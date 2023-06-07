@@ -1,6 +1,7 @@
 on:
   release:
     types: [created]
+  workflow_dispatch:
 
 permissions: write-all
 
@@ -20,10 +21,9 @@ jobs:
             archive: zip
     steps:
       - uses: actions/checkout@master
+      - uses: rui314/setup-mold@v1
       - name: Rust Cache
         uses: Swatinem/rust-cache@v2.2.1
-      - name: Setup SDL2
-        run: sudo apt-get install libsdl2-dev
       - name: Compile and release
         uses: rust-build/rust-build.action@v1.4.3
         env:
