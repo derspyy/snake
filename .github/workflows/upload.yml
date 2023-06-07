@@ -20,7 +20,6 @@ jobs:
             archive: zip
     steps:
       - uses: actions/checkout@master
-      - uses: rui314/setup-mold@v1
       - name: Rust Cache
         uses: Swatinem/rust-cache@v2.2.1
       - name: Setup SDL2
